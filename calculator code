@@ -1,0 +1,261 @@
+##
+# Zodiac Compatibility
+#
+# @authors Daniel Lu, Alisha Majumder, Michael Wang
+# @date 2022/04/20 - last modified
+# @chart used 30297019._SX540_.jpg (Pre-update)
+##
+
+#Get zodiac signs
+def getZodiacSign(month, day):
+    sign = "result"
+  
+    #Jan
+    if (month == 1):
+      if(day <= 19):
+        sign = "Capricorn"
+      else:
+       sign = "Aquarius"
+      
+    #Feb
+    if (month == 2):
+      if (day <= 18):
+        sign = "Aquarius"
+      else:
+        sign = "Pisces"
+        
+    #March
+    if (month == 3):
+      if (day <= 20):
+        sign = "Pisces"
+      else:
+        sign = "Aries"
+        
+    #April
+    if (month == 4):
+      if (day <= 19):
+        sign = "Aries"
+      else:
+        sign = "Taurus"
+        
+    #May
+    if (month == 5):
+      if (day <= 20):
+        sign = "Taurus"
+      else:
+        sign = "Gemini"
+        
+    #June
+    if (month == 6):
+      if (day <= 20):
+        sign = "Gemini"
+      else:
+        sign = "Cancer"
+      
+    #July
+    if (month == 7):
+      if (day <= 22):
+        sign = "Cancer"
+      else:
+        sign = "Leo"
+    #August
+    if (month == 8):
+      if (day <= 22):
+        sign = "Leo"
+      else:
+        sign = "Virgo"
+
+    #September
+    if (month == 9):
+      if (day <= 22):
+        sign = "Virgo"
+      else: 
+        sign = "Libra"
+
+    #October
+    if (month == 10):
+      if (day <= 22):
+        sign = "Libra"
+      else:
+        sign = "Scorpio"
+
+    #November
+    if (month == 11):
+      if (day <= 21):
+        sign = "Scorpio"
+      else:
+        sign = "Sagittarius"
+        
+    #December
+    if (month == 12):
+      if (day <= 21):
+        sign = "Sagittarius"
+      else:
+        sign = "Capricorn"
+    return sign
+
+#Get Birthday
+def getBirthday():
+  
+    #Get month
+    valid = False
+    while(not valid):
+      try:
+        month = int(input("Please enter your birth month as a number: "))
+        if (month <= 12 and month >= 1):
+          valid = True
+        else:
+          print("Invalid input, try again. ")
+      except:
+        print("Invalid input, try again. ")
+        
+    #Number of days in month
+    if (month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12):
+      days = 31
+    elif (month == 2):
+      days = 29
+    else:
+      days = 30
+      
+    #Get day
+    valid = False
+    while(not valid):
+      try:
+        day = int(input("Enter the day of your birthday: "))
+        if (day <= 31 and day >= 1 and days == 31):
+          valid = True
+        elif (day <= 30 and day >= 1 and days == 30):
+          valid = True
+        elif (day <= 29 and day >= 1 and days == 29):
+          valid = True
+        else:
+          print("Invalid input, try again. ")
+      except:
+        print("Invalid input, try again. ")
+    print()
+    return day, month
+
+# Contradictions for power couple
+def powerContradictions(zSign, zSign2):
+  if (zSign == "Taurus" and zSign2 == "Cancer" or zSign == "Cancer" and zSign2 == "Taurus"):
+    contradiction = True
+  elif zSign == "Gemini" and zSign2 == "Aries" or zSign == "Aries" and zSign2 == "Gemini":
+    contradiction = True
+  elif (zSign == "Libra" and zSign2 == "Capricorn" or zSign == "Capricorn" and zSign2 == "Libra"):
+    contradiction = True
+  elif zSign == "Scorpio" and zSign2 == "Sagittarius" or zSign == "Sagittarius" and zSign2 == "Scorpio":
+    contradiction = True
+  elif zSign == "Aquarius" and zSign2 == "Pisces" or zSign == "Pisces" and zSign2 == "Aquarius":
+    contradiction = True
+  else:
+    contradiction = False
+  return contradiction
+
+## MAIN Program
+print("Welcome to the Zodiac Compatibility test.\n")
+
+# Get birthdays
+bday, bmonth = getBirthday()
+bday2, bmonth2 = getBirthday()
+
+# Find their signs 
+zSign = getZodiacSign(bmonth, bday)
+zSign2 = getZodiacSign(bmonth2, bday2)
+print(f"First user: {zSign}")
+print(f"Second user: {zSign2}\n")
+
+# Find their elements (earth, fire, air, water)
+def elements(Sign):
+  
+  #Earth
+  if (Sign == "Taurus" or Sign == "Virgo" or Sign == "Capricorn"):
+    element = "earth"
+    
+  #Fire
+  elif (Sign == "Aries" or Sign == "Leo" or Sign == "Sagittarius"):
+    element = "fire"
+    
+  #Air
+  elif (Sign == "Gemini" or Sign == "Libra" or Sign == "Aquarius"):
+    element = "air"
+    
+  #Water
+  else:
+    element = "water"
+  return element
+
+# Power couple matches
+def powerCouple(zSign, zSign2):
+  if zSign == "Taurus" and zSign2 == "Cancer" or zSign == "Cancer" and zSign2 == "Taurus":
+    powerCoupleMatch = True
+  elif zSign == "Gemini" and zSign2 == "Aries" or zSign == "Aries" and zSign2 == "Gemini":
+    powerCoupleMatch = True
+  elif zSign == "Leo" and zSign2 == "Leo":
+    powerCoupleMatch = True
+  elif zSign == "Virgo" and zSign2 == "Virgo":
+    powerCoupleMatch = True
+  elif zSign == "Libra" and zSign2 == "Capricorn" or zSign == "Capricorn" and zSign2 == "Libra":
+    powerCoupleMatch = True
+  elif zSign == "Scorpio" and zSign2 == "Sagittarius" or zSign == "Sagittarius" and zSign2 == "Scorpio":
+    powerCoupleMatch = True
+  elif zSign == "Aquarius" and zSign2 == "Pisces" or zSign == "Pisces" and zSign2 == "Aquarius":
+    powerCoupleMatch = True
+  else:
+    powerCoupleMatch = False
+  return powerCoupleMatch
+
+# Dangerous matches
+def danger(sign, sign2):
+  if (sign == "Aries" and sign2 == "Cancer" or sign == "Cancer" and sign2 == "Aries"):
+    dangerMatch = True
+  elif (sign == "Taurus" and sign2 == "Leo" or sign == "Leo" and sign2 == "Taurus"):
+    dangerMatch = True
+  elif (sign == "Cancer" and sign2 == "Aquarius" or sign == "Aquarius" and sign2 == "Cancer"):
+    dangerMatch = True
+  elif (sign == "Leo" and sign2 == "Capicorn" or sign == "Capicorn" and sign2 == "Leo"):
+    dangerMatch = True
+  elif (sign == "Virgo" and sign2 == "Sagittarius" or sign == "Sagittarius" and sign2 == "Virgo"):
+    dangerMatch = True
+  elif (sign == "Libra" and sign2 == "Virgo" or sign == "Virgo" and sign2 == "Libra"):
+    dangerMatch = True
+  elif (sign == "Scorpio" and sign2 == "Libra" or sign == "Libra" and sign2 == "Scorpio"):
+    dangerMatch = True
+  elif (sign == "Pisces" and sign2 == "Pisces" or sign == "Pisces" and sign2 == "Pisces"):
+    dangerMatch = True
+  else:
+    dangerMatch = False
+  return dangerMatch
+  
+# Are they compatible?
+element1 = elements(zSign)
+element2 = elements(zSign2)
+print(f"{zSign} is under the {element1} element.")
+print(f"{zSign2} is under the {element2} element.\n")
+if (element1 == element2):
+  print("According to the Zodiacs, you are compatible. ")
+else:
+  print("According to the Zodiacs, you are incompatible. ")
+  
+# Show if they are a power couple
+powerCouple = powerCouple(zSign, zSign2)
+if powerCouple:
+  print("According to the Zodiacs, you are a power couple match. ")
+else:
+  print("According to the Zodiacs, you are NOT a power couple match. ")
+
+# Show dangerous matches 
+dangerCouple = danger(zSign, zSign2)
+if (dangerCouple):
+  print("According to the Zodiacs, you are a dangerous match.\n")
+else:
+  print("According to the Zodiacs, you are NOT a dangerous match.\n")
+
+## Element extension
+# Contradiction: Power Couple
+contradiction = powerContradictions(zSign, zSign2)
+if contradiction:
+  print("Warning: Contradiction between compatability and power couple. ")
+  
+# Contradiction: Dangerous match
+if (zSign == "Pisces" and zSign2 == "Pisces"):
+  print("Warning: Contradiction between compatability and dangerous match. ")
